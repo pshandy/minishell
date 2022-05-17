@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <signal.h>
 
+#include <readline/readline.h>
+#include <readline/history.h>
+
 char **g_envp;
 
 void save_envp(char **envp);
