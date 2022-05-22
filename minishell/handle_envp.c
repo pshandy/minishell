@@ -24,4 +24,9 @@ void save_envp(char **envp)
 	while (length--)
 		g_envp[length] = ft_strdup(envp[length]);
 
+	for (int i = 0; i < get_length(envp); i++)
+	{
+		printf("%s\n", g_envp[i]);
+	}
+
 }
