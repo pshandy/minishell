@@ -67,6 +67,8 @@ char **parse_string(char *str)
 
 int validate(char **strarr)
 {
+	int pipes = 1;
+
 	if (is_operator(*strarr))
 	{
 		printf("Нельзя начать с оператора!\n");
@@ -74,6 +76,16 @@ int validate(char **strarr)
 	}
 	while (*strarr)
 	{
+		if (pipes == 1 && (ft_strcmp(*strarr, "<") == 0 || ft_strcmp(*strarr, "<<") == 0
+				|| ft_strcmp(*strarr, ">") == 0 || ft_strcmp(*strarr, ">>") == 0))
+		{
+			pipes = 0;
+		}
+		else if (pipes == 0 && ft_strcmp(*strarr, "|") == 0)
+		{
+			printf("Пайпы должны идти до редиректов!\n");
+			return (0);
+		}
 		if (!is_operator(*strarr) && (ft_strstr(*strarr, "|") != NULL
 				|| ft_strstr(*strarr, "<") != NULL || ft_strstr(*strarr, "<<") != NULL
 				|| ft_strstr(*strarr, ">") != NULL || ft_strstr(*strarr, ">>") != NULL))
@@ -93,12 +105,26 @@ int validate(char **strarr)
 	return (1);
 }
 
+typedef struct	s_cmd
+{
+	char	*command;
+	char	**command_args;
+	int		cmd_count;
+}				t_cmd;
+
+
+void make_commands()
+{
+
+}
+
 int main()
 {
-	char str[] = "ls -l | \"asda asdsd\"";
+	char str[] = "ls -l \"asda asdsd\" asd";
 
 	char **t = parse_string(str);
 	validate(t);
+
 	while (*t != NULL)
 	{
 		printf("Token: %s\n", *t);
