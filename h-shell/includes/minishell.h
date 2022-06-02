@@ -56,10 +56,10 @@ typedef struct s_data
 void	show_entry(t_data *data);
 void	free_hashmap(t_data *data);
 int		get_hash(char *str);
-int		init_hashmap(t_data *data, int size); // Инициализирует мапу
-int		add_to_hashmap(t_data *data, char *key, char *value); // Добавляет в мапу элемент: ключ-значение
-int		del_from_hashmap(t_data *data, char *key); // Удаляет элемент
-char	*get_value(t_data *data, char *key); // Возвращается значение ключа
+int		init_hashmap(t_data *data, int size);
+int		add_to_hashmap(t_data *data, char *key, char *value);
+int		del_from_hashmap(t_data *data, char *key);
+char	*get_value(t_data *data, char *key);
 
 /* list.c */
 int		ft_lstadd_back(t_hashmap **hashmap, char *key, char *value);

@@ -51,6 +51,11 @@ char **parse_string(char *str)
 			flag = 1;
 			*delim = '\"';
 		}
+		else if (*olds == '\'' && flag == 0)
+		{
+			flag = 1;
+			*delim = '\'';
+		}
 		else if (flag == 1)
 		{
 			flag = 0;
@@ -112,15 +117,14 @@ typedef struct	s_cmd
 	int		cmd_count;
 }				t_cmd;
 
-
-void make_commands()
+void get_cmds(char **arr)
 {
-
+	//while ()
 }
 
 int main()
 {
-	char str[] = "ls -l \"asda asdsd\" asd";
+	char str[] = "ls -l '\"asda asdsd\"' asd";
 
 	char **t = parse_string(str);
 	validate(t);
@@ -131,35 +135,6 @@ int main()
 		*t++;
 	}
 
-//	char str[] = "String   to |parse | | pwd";
-//	char *str_array[1024];
-//
-//	int i = 0;
-//	char *token;
-//	token = ft_strtok(str, " ");
-//	while (token != NULL)
-//	{
-//		str_array[i] = ft_strdup(token);
-//		token = ft_strtok(NULL, " ");
-//		i++;
-//	}
-//
-//	for (int i = 0; i < 1024; i++)
-//	{
-//		if (str_array[i] == NULL)
-//			break ;
-//		if (is_operator(str_array[i]) && (str_array[i + 1] == NULL || is_operator(str_array[i + 1])))
-//		{
-//			printf("ERROR!\n");
-//			return (0);
-//		}
-//
-//	}
-//
-//	for (int i = 0; i < 1024; i++)
-//	{
-//		if (str_array[i] == NULL)
-//			break ;
-//		printf("%s\n", str_array[i]);
-//	}
+
+
 }
