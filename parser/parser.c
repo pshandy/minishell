@@ -122,19 +122,41 @@ void get_cmds(char **arr)
 	//while ()
 }
 
+char **add_str(char **arr, char *str)
+{
+	int		len;
+	char	**new_arr;
+
+	len = 0;
+	if (arr)
+		while (arr[len])
+			len++;
+	new_arr = malloc(sizeof(char *) * (len + 2));
+	if (!new_arr)
+		return (NULL);
+	new_arr[len + 1] = NULL;
+	new_arr[len] = ft_strdup(str);
+	while (len--) {
+		new_arr[len] = ft_strdup(arr[len]);
+		free(arr[len]);
+	}
+	free(arr);
+	return (new_arr);
+}
+
 int main()
 {
-	char str[] = "ls -l '\"asda asdsd\"' asd";
+	char **t = NULL;
 
-	char **t = parse_string(str);
-	validate(t);
+	t = add_str(t, "abiba");
+//	t = add_str(t, "sd");
 
-	while (*t != NULL)
+	int i = 0;
+	while (t[i])
 	{
-		printf("Token: %s\n", *t);
-		*t++;
+		printf("%s\n", t[i]);
+		free(t[i]);
+		i++;
 	}
-
-
-
+	free(t);
 }

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 11:56:22 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 11:56:24 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * int ft_isalnum(int c)
+ *
+ * Checks for an alphanumeric character.
+ * 
+ * Return: 0 or 1.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_isalnum(int c)
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	return (ft_isalpha(c) || ft_isdigit(c));
 }

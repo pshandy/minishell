@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   handle_envp.c                                        :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+static int	envp_size(char	**envp)
 {
-	int	i;
+	int	length;
 
+	length = 0;
+	while (envp[length])
+		length++;
+	return (length);
+}
+
+int	handle_envp(t_data *data, char **envp)
+{
+	int		i;
+	char	**spl_str;
+
+	if (init_hashmap(data, envp_size(envp) * 2) == F_ALLOC)
+		return (F_ALLOC);
 	i = 0;
-	while (src[i] != '\0')
+	while (i < data->hashmap_size / 2)
 	{
-		dest[i] = src[i];
+		spl_str = ft_split2(envp[i], '=');
+		if (spl_str != NULL
+			&& add_to_hashmap(data, spl_str[0], spl_str[1]) == F_ALLOC)
+			return (F_ALLOC);
+		free(spl_str);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (1);
 }

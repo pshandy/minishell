@@ -12,6 +12,26 @@
 
 #include "../minishell.h"
 
+static int	get_words(char *str, char *old, int *i)
+{
+	int	words;
+	int	word_len;
+
+	*i = 0;
+	words = 0;
+	word_len = ft_strlen(old);
+	while (str[*i])
+	{
+		if (ft_strstr(&str[*i], old) == &str[*i])
+		{
+			words++;
+			*i += word_len - 1;
+		}
+		*i += 1;
+	}
+	return (words);
+}
+
 char	*ft_replace(char *str, char *old, char *new)
 {
 	int		i;
@@ -20,36 +40,22 @@ char	*ft_replace(char *str, char *old, char *new)
 
 	if (old == NULL || new == NULL)
 		return (NULL);
-
-    int newWlen = ft_strlen(new);
-    int oldWlen = ft_strlen(old);
-
+	words = get_words(str, old, &i);
+	result = malloc(i + words * (ft_strlen(new) - ft_strlen(old)) + 1);
+	if (!result)
+		return (NULL);
 	i = 0;
-	words = 0;
-	while (str[i])
+	while (*str)
 	{
-		if (ft_strstr(&str[i], old) == &str[i])
+		if (ft_strstr(str, old) == str)
 		{
-			words++;
-			i += oldWlen - 1;
+			ft_strcpy(&result[i], new);
+			i += ft_strlen(new);
+			str += ft_strlen(old);
 		}
-		i++;
+		else
+			result[i++] = *str++;
 	}
-
-	result = (char*)malloc(i + words * (newWlen - oldWlen) + 1);
-
-    i = 0;
-    while (*str) {
-
-        if (ft_strstr(str, old) == str) {
-            ft_strcpy(&result[i], new);
-            i += newWlen;
-            str += oldWlen;
-        }
-        else
-            result[i++] = *str++;
-    }
-
-    result[i] = '\0';
+	result[i] = '\0';
 	return (result);
 }

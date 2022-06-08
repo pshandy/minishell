@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:08:38 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:08:40 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ *void	ft_lstadd_front(t_list **lst, t_list *new)
+ *
+ * Adds the element ’new’ at the beginning of the
+ * list.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	if (new == NULL)
+		return ;
+	new->next = *lst;
+	*lst = new;
 }

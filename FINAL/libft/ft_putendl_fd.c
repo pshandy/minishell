@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 12:14:19 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 12:14:20 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+* void ft_putendl_fd(char *s, int fd)
+* s - The string to output.
+* fd - The file descriptor on which to write.
+*
+* Outputs the string ’s’ to the given file descriptor, followed by a newline.
+*
+* Return: None.
+*/
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	ft_putendl_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
+	if (s != NULL)
 	{
-		dest[i] = src[i];
-		i++;
+		ft_putstr_fd(s, fd);
+		ft_putchar_fd('\n', fd);
 	}
-	dest[i] = '\0';
-	return (dest);
 }

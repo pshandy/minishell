@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   hashmap1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	free_hashmap(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (i < data->hashmap_size)
 	{
-		dest[i] = src[i];
+		_ft_lstclear(&data->hashmap[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	free(data->hashmap);
+}
+
+char	**hashmap_to_array()
+{
+	//TO_DO
 }

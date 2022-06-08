@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_unset.c                                          :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_unset(t_data *data, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
+	if (!is_letter(str))
 	{
-		dest[i] = src[i];
-		i++;
+		perror("Ошибка в значении ключа!\n");
+		return (1);
 	}
-	dest[i] = '\0';
-	return (dest);
+	del_from_hashmap(data, str);
+	return (0);
 }

@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 11:57:47 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 11:57:48 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * size_t ft_strlen(const char *str)
+ *
+ * Calculates the length of the string pointed
+ * to by str, excluding the terminating null byte ('\0').
+ *
+ * Return: number of bytes in the string
+ * pointed to by str.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+size_t	ft_strlen(const char *str)
 {
-	int	i;
+	const char	*end;
 
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	end = str;
+	while (*end != '\0')
+		end++;
+	return (end - str);
 }

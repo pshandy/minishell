@@ -188,8 +188,8 @@ void	to_do(t_data *data)
 	t_cmd **cmd_array = malloc(sizeof(t_cmd *) * array_size);
 
 	//cmd_array[0] = add_cmd("echo", "custom Text -l");
-	cmd_array[0] = add_cmd("echo", "custom Text -l");
-	cmd_array[1] = add_cmd("wc", "banana,-l");
+	cmd_array[0] = add_cmd("ls", "banana,-l");
+//	cmd_array[1] = add_cmd("wc", "banana,-l");
 
 	data->cmd_list = cmd_array;
 	execute(cmd_array, infile, outfile, data);

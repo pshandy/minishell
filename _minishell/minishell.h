@@ -75,4 +75,10 @@ char	*ft_replace(char *str, char *old, char *new);
 int		validate(char **strarr);
 char	*handle_dollar(char *buf, t_data *data);
 
+int		is_operator(char *str);
+int		contains_operator(char *strarr);
+int		check_order(char **strarr);
+int		print_errors(int err);
+int		validate(char **strarr);
+
 #endif

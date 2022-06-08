@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:12:31 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:12:32 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * int		ft_lstsize(t_list *lst)
+ *
+ * Counts the number of elements in a list.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_lstsize(t_list *lst)
 {
-	int	i;
+	int		len;
+	t_list	*it;
 
-	i = 0;
-	while (src[i] != '\0')
+	len = 0;
+	it = lst;
+	while (it)
 	{
-		dest[i] = src[i];
-		i++;
+		len++;
+		it = it->next;
 	}
-	dest[i] = '\0';
-	return (dest);
+	return (len);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * char *ft_strrchr(const char *str, int c)
+ *
+ * Returns a pointer to the last occurrence
+ * of the character c in the string str.
+ *
+ * Return: pointer to the matched character or NULL if the
+ * character is not found.  The terminating null byte
+ * is considered part of the string, so that if c is
+ * specified as '\0', these functions return a
+ * pointer to the terminator.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_strrchr(const char *str, int c)
 {
-	int	i;
+	char	*save;
 
-	i = 0;
-	while (src[i] != '\0')
+	save = 0;
+	while (1)
 	{
-		dest[i] = src[i];
-		i++;
+		if (*str == (unsigned char)c)
+			save = (char *)str;
+		if (*str == '\0')
+			return (save);
+		str++;
 	}
-	dest[i] = '\0';
-	return (dest);
 }

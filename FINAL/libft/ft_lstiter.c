@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:08:55 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:08:56 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * void	ft_lstiter(t_list *lst, void (*f)(void *))
+ *
+ * Iterates the list ’lst’ and applies the function
+ * ’f’ to the content of each element.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
+	if (lst == NULL || f == NULL)
+		return ;
+	while (lst)
 	{
-		dest[i] = src[i];
-		i++;
+		f(lst->content);
+		lst = lst->next;
 	}
-	dest[i] = '\0';
-	return (dest);
 }

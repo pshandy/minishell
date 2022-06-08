@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+int	ft_pwd(void)
 {
-	int	i;
+	char	cwd[PATH_MAX];
 
-	i = 0;
-	while (src[i] != '\0')
+	if (getcwd(cwd, PATH_MAX))
 	{
-		dest[i] = src[i];
-		i++;
+		printf("%s\n", cwd);
+		return (0);
 	}
-	dest[i] = '\0';
-	return (dest);
+	else
+	{
+		printf("Ошибка pwd\n");
+		return (1);
+	}
 }

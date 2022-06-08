@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   cmd_utils.c                                         :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strcpy(char *dest, char *src)
+char	**add_str(char **arr, char *str)
 {
-	int	i;
+	int		len;
+	char	**new_arr;
 
-	i = 0;
-	while (src[i] != '\0')
+	len = 0;
+	if (arr)
+		while (arr[len])
+			len++;
+	new_arr = malloc(sizeof(char *) * (len + 2));
+	if (!new_arr)
+		return (NULL);
+	new_arr[len + 1] = NULL;
+	new_arr[len] = ft_strdup(str);
+	while (len--)
 	{
-		dest[i] = src[i];
-		i++;
+		new_arr[len] = ft_strdup(arr[len]);
+		free(arr[len]);
 	}
-	dest[i] = '\0';
-	return (dest);
+	free(arr);
+	return (new_arr);
 }

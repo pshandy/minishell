@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:07:54 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:11:55 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * void	ft_lstadd_back(t_list **lst, t_list *new)
+ *
+ * Adds the element ’new’ at the end of the list.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	i;
+	t_list		*begin;
 
-	i = 0;
-	while (src[i] != '\0')
+	if (lst && new)
 	{
-		dest[i] = src[i];
-		i++;
+		begin = *lst;
+		if (begin == NULL)
+			*lst = new;
+		else
+		{
+			while (begin->next)
+				begin = begin->next;
+			begin->next = new;
+		}
 	}
-	dest[i] = '\0';
-	return (dest);
 }

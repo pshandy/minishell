@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/14 12:06:35 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/14 12:06:36 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 11:58:22 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 11:58:24 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * void	ft_bzero(void * s , size_t  n)
+ *
+ * Erases the data in the n bytes of the memory
+ * starting at the location pointed to by s,
+ * by writing zeros (bytes containing '\0') to that area.
+ *
+ * Return: None.
+ */
+
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, char *src)
+void	ft_bzero(void *s, size_t n)
 {
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	ft_memset(s, 0, n);
 }
