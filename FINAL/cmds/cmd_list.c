@@ -19,8 +19,8 @@ int	cmd_lstinit(t_cmd **cmd_list)
 		return (F_ALLOC);
 	(*cmd_list)->cmd = NULL;
 	(*cmd_list)->args = NULL;
-	(*cmd_list)->infile = -1;
-	(*cmd_list)->outfile = -1;
+	(*cmd_list)->infile = -2;
+	(*cmd_list)->outfile = -2;
 	(*cmd_list)->prev = *cmd_list;
 	(*cmd_list)->next = *cmd_list;
 	return (1);
@@ -47,4 +47,22 @@ t_cmd	*cmd_create_elem(void)
 	cmd->infile = -1;
 	cmd->outfile = -1;
 	return (cmd);
+}
+
+void	cmd_lstclear(t_cmd **lst)
+{
+	t_cmd	*tmp;
+	t_cmd	*next;
+
+	next = (*lst)->next;
+	while (next != *lst)
+	{
+		tmp = next;
+		free(tmp->cmd);
+		free(tmp->args[0]);
+		free(tmp->args);
+		next = next->next;
+		free(tmp);
+	}
+	free(*lst);
 }

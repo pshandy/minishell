@@ -12,6 +12,16 @@
 
 #include "libft.h"
 
+/*
+ * char	*ft_strcpy(char *dest, char *src)
+ *
+ * The strcpy() function copies the string pointed to by src,
+ * including the terminating null byte ('\0'), to the buffer pointed
+ * to by dest.  The strings may not overlap, and the destination
+ * string dest must be large enough to receive the copy.
+ *
+ */
+
 char	*ft_strcpy(char *dest, char *src)
 {
 	int	i;

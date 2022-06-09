@@ -8,6 +8,8 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <limits.h>
 
 # define F_ALLOC -42
@@ -104,5 +106,10 @@ int		is_letter(char *str);
 
 int		ft_cd(t_data *data, char **args);
 int		ft_unset(t_data *data, char *str);
+
+char	**hashmap_to_array(t_data *data);
+void	cmd_lstclear(t_cmd **lst);
+
+void	execute(t_data *data);
 
 # endif

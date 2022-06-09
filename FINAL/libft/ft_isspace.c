@@ -10,6 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+ * int ft_isspace(int c)
+ *
+ * Checks for an alphanumeric character;
+ * it is equivalent to (isalpha(c) || isdigit(c)).
+ *
+ * Return: 0 or 1.
+ */
+
+
 #include "libft.h"
 
 int	ft_isspace(int c)

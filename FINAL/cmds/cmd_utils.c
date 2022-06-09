@@ -25,11 +25,12 @@ char	**add_str(char **arr, char *str)
 	if (!new_arr)
 		return (NULL);
 	new_arr[len + 1] = NULL;
-	new_arr[len] = ft_strdup(str);
-	while (len--)
+	new_arr[len] = str;
+	int i = 0;
+	while (arr && arr[i] != NULL)
 	{
-		new_arr[len] = ft_strdup(arr[len]);
-		free(arr[len]);
+		new_arr[i] = arr[i];
+		i++;
 	}
 	free(arr);
 	return (new_arr);

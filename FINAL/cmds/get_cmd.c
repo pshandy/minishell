@@ -26,7 +26,7 @@ void get_cmd(t_data *data)
 			if (tmp->type == CMD)
 			{
 				cmd->cmd = ft_strdup(tmp->str);
-				cmd->args = add_str(cmd->args, tmp->str);
+				cmd->args = add_str(cmd->args, ft_strdup(tmp->str));
 			}
 			else if (tmp->type == INPUT)
 			{

@@ -25,6 +25,8 @@
 
 # define F_ALLOC -42
 
+extern int g_fork = -42;
+
 typedef struct s_cmd
 {
 	char	*command;

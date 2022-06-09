@@ -18,12 +18,13 @@ int	ft_pwd(void)
 
 	if (getcwd(cwd, PATH_MAX))
 	{
-		printf("%s\n", cwd);
+		ft_putstr_fd(cwd, 1);
+		ft_putstr_fd("\n", 1);
 		return (0);
 	}
 	else
 	{
-		printf("Ошибка pwd\n");
+		ft_putstr_fd("Ошибка pwd\n", 1);
 		return (1);
 	}
 }
