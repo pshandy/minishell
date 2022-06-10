@@ -30,30 +30,8 @@ static void	signal_handler(int sig)
 	rl_redisplay();
 }
 
-/*
- * Перехватывает SIGSEGV
- */
-
-static void	sig_seg(int code)
-{
-	(void) code;
-	ft_putstr_fd("Ошибка сегментации.\n", 1);
-}
-
-/*
- * Перехватывает SIGABRT
- */
-
-static void	sig_sbrt(int code)
-{
-	(void) code;
-	ft_putstr_fd("Аборт.\n", 1);
-}
-
 void	init_signal(void)
 {
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGSEGV, &sig_seg);
-	signal(SIGABRT, &sig_sbrt);
 }

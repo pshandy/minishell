@@ -148,7 +148,9 @@ void		ft_exit(t_data *data, char **args);
 /* -----------------execute----------------- */
 
 int			is_built_in(char *cmd);
+char		*is_cmd_present(t_data *data, t_cmd *cmd);
 void		execute(t_data *data);
 void		launch_builtin(t_data *data, t_cmd *tmp);
-
+void		launch_child(t_data *data, t_cmd *cmd);
+void		select_and_exec(t_data *data, t_cmd *cmd);
 #endif
