@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 12:14:19 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 12:14:20 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*
+* void ft_putendl_fd(char *s, int fd)
+* s - The string to output.
+* fd - The file descriptor on which to write.
+*
+* Outputs the string ’s’ to the given file descriptor, followed by a newline.
+*
+* Return: None.
+*/
 
-int	ft_pwd(void)
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
 {
-	char	cwd[PATH_MAX];
-
-	if (getcwd(cwd, PATH_MAX))
+	if (s != NULL)
 	{
-		printf("%s\n", cwd);
-		return (0);
-	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
+		ft_putstr_fd(s, fd);
+		ft_putchar_fd('\n', fd);
 	}
 }

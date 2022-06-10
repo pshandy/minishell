@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:07:54 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:11:55 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*
+ * void	ft_lstadd_back(t_list **lst, t_list *new)
+ *
+ * Adds the element ’new’ at the end of the list.
+ */
 
-int	ft_pwd(void)
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	cwd[PATH_MAX];
+	t_list		*begin;
 
-	if (getcwd(cwd, PATH_MAX))
+	if (lst && new)
 	{
-		printf("%s\n", cwd);
-		return (0);
-	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
+		begin = *lst;
+		if (begin == NULL)
+			*lst = new;
+		else
+		{
+			while (begin->next)
+				begin = begin->next;
+			begin->next = new;
+		}
 	}
 }

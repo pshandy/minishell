@@ -48,16 +48,8 @@ void	select_and_exec(int save_stdout, t_data *data, t_cmd *cmd)
 		while (cmd->args[++i])
 			data->exit_code = ft_unset(data, cmd->args[i]);
 	}
-
-//	else if (ft_strcmp("exit", cmd->cmd) == 0)
-//	{
-//		if (cmd->outfile >= 0)
-//		{
-//			dup2(save_stdout, 1);
-//			close(save_stdout);
-//		}
-//		ft_exit(data, cmd);
-//	}
+	else if (ft_strcmp("exit", cmd->cmd) == 0)
+		ft_exit(data, cmd);
 }
 
 char *run_cmd(t_data *data, t_cmd *cmd)
@@ -91,23 +83,6 @@ char *run_cmd(t_data *data, t_cmd *cmd)
 	return (NULL);
 }
 
-void	redirect_in_out(t_data *data, t_cmd *cmd, int *fd)
-{
-	close(fd[0]);
-	if (cmd->infile >= 0)
-	{
-		dup2(cmd->infile, 0);
-		close(cmd->infile);
-	}
-	if (cmd->outfile >= 0)
-	{
-		dup2(cmd->outfile, 1);
-		close(cmd->outfile);
-	}
-	else if (cmd->next != data->cmds)
-		dup2(fd[1], 1);
-	close(fd[1]);
-}
 
 void	launch_builtin(t_data *data, t_cmd *tmp)
 {

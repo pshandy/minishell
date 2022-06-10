@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 12:01:15 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 12:01:17 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*
+ * int ft_tolower(int c)
+ *
+ * Returns the lowercase letter corresponding to the argument passed;
+ * otherwise, returns the argument unchanged.
+ */
 
-int	ft_pwd(void)
+#include "libft.h"
+
+static int	ft_isupper(int c)
 {
-	char	cwd[PATH_MAX];
+	return (c >= 'A' && c <= 'Z');
+}
 
-	if (getcwd(cwd, PATH_MAX))
-	{
-		printf("%s\n", cwd);
-		return (0);
-	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
-	}
+int	ft_tolower(int c)
+{
+	if (ft_isupper(c))
+		return (c + 32);
+	return (c);
 }

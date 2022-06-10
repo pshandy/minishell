@@ -25,21 +25,30 @@ int is_letter(char *str)
 
 int	ft_export(t_data *data, char *str)
 {
+	int		ret;
 	char	**strarr;
 	t_hashmap	*tmp;
 
+	ret = 0;
 	if (!str || ft_strchr(str, '=') == 0)
 		return (1);
 	strarr = ft_split2(str, '=');
 	if (!is_letter(strarr[0]))
 	{
 		perror("Ошибка в значении ключа!\n");
+		free(strarr[0]);
+		free(strarr[1]);
+		free(strarr);
 		return (1);
 	}
 	tmp = get_record(data, strarr[0]);
-	if (tmp == NULL)
-		add_to_hashmap(data, strarr[0], strarr[1]);
+	if (tmp == NULL && !add_to_hashmap(data, strarr[0], strarr[1]))
+		ret = 0;
 	else
+	{
 		tmp->value = strarr[1];
-	return (0);
+		free(strarr[0]);
+	}
+	free(strarr);
+	return (ret);
 }

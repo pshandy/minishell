@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/18 12:12:31 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/18 12:12:32 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*
+ * int		ft_lstsize(t_list *lst)
+ *
+ * Counts the number of elements in a list.
+ */
 
-int	ft_pwd(void)
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
 {
-	char	cwd[PATH_MAX];
+	int		len;
+	t_list	*it;
 
-	if (getcwd(cwd, PATH_MAX))
+	len = 0;
+	it = lst;
+	while (it)
 	{
-		printf("%s\n", cwd);
-		return (0);
+		len++;
+		it = it->next;
 	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
-	}
+	return (len);
 }

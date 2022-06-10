@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 11:58:22 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 11:58:24 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*
+ * void	ft_bzero(void * s , size_t  n)
+ *
+ * Erases the data in the n bytes of the memory
+ * starting at the location pointed to by s,
+ * by writing zeros (bytes containing '\0') to that area.
+ *
+ * Return: None.
+ */
 
-int	ft_pwd(void)
+#include "libft.h"
+
+void	ft_bzero(void *s, size_t n)
 {
-	char	cwd[PATH_MAX];
-
-	if (getcwd(cwd, PATH_MAX))
-	{
-		printf("%s\n", cwd);
-		return (0);
-	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
-	}
+	ft_memset(s, 0, n);
 }

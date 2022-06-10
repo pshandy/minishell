@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 11:57:47 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 11:57:48 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+/*
+ * size_t ft_strlen(const char *str)
+ *
+ * Calculates the length of the string pointed
+ * to by str, excluding the terminating null byte ('\0').
+ *
+ * Return: number of bytes in the string
+ * pointed to by str.
+ */
 
-int	ft_pwd(void)
+#include "libft.h"
+
+size_t	ft_strlen(const char *str)
 {
-	char	cwd[PATH_MAX];
+	const char	*end;
 
-	if (getcwd(cwd, PATH_MAX))
-	{
-		printf("%s\n", cwd);
-		return (0);
-	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
-	}
+	end = str;
+	while (*end != '\0')
+		end++;
+	return (end - str);
 }

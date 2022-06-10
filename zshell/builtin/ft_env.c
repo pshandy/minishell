@@ -12,18 +12,17 @@
 
 #include "../minishell.h"
 
-int	ft_pwd(void)
+int	ft_env(t_data *data)
 {
-	char	cwd[PATH_MAX];
+	int	i;
 
-	if (getcwd(cwd, PATH_MAX))
+	i = 0;
+	while (i < data->hashmap_size)
 	{
-		printf("%s\n", cwd);
-		return (0);
+		if (!(&data->hashmap[i]->next == &data->hashmap[i]
+				&& &data->hashmap[i]->prev == &data->hashmap[i]))
+			print_list(&data->hashmap[i]);
+		i++;
 	}
-	else
-	{
-		printf("Ошибка pwd\n");
-		return (1);
-	}
+	return (0);
 }

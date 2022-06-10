@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_echo.c                                           :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,26 @@
 
 #include "../minishell.h"
 
-int	ft_pwd(void)
+int	ft_echo(char **args)
 {
-	char	cwd[PATH_MAX];
+	int	i;
+	int	nl;
 
-	if (getcwd(cwd, PATH_MAX))
-	{
-		printf("%s\n", cwd);
+	i = 0;
+	nl = 0;
+	if (!args)
 		return (0);
-	}
-	else
+	if (ft_strcmp(args[0], "-n") == 0)
+		nl = ++i;
+	while (args[i])
 	{
-		printf("Ошибка pwd\n");
-		return (1);
+		if (args[i + 1])
+			printf("%s ", args[i]);
+		else
+			printf("%s", args[i]);
+		i++;
 	}
+	if (!nl)
+		printf("\n");
+	return (0);
 }

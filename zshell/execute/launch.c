@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   launch.c											:+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 12:10:42 by pshandy           #+#    #+#             */
-/*   Updated: 2021/10/18 12:10:43 by pshandy          ###   ########.fr       */
+/*   Created: 2021/10/14 11:56:51 by pshandy           #+#    #+#             */
+/*   Updated: 2021/10/14 11:56:52 by pshandy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_pwd(void)
+void	launch_builtin(t_data *data, t_cmd *tmp)
 {
-	char	cwd[PATH_MAX];
+	int	tmpin;
 
-	if (getcwd(cwd, PATH_MAX))
+	tmpin = -42;
+	if (tmp->outfile >= 0)
 	{
-		printf("%s\n", cwd);
-		return (0);
+		tmpin = dup(1);
+		dup2(tmp->outfile, 1);
 	}
-	else
+	select_and_exec(tmpin, data, tmp);
+	if (tmp->outfile >= 0)
 	{
-		printf("Ошибка pwd\n");
-		return (1);
+		dup2(tmpin, 1);
+		close(tmpin);
 	}
 }

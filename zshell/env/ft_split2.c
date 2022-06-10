@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:  */
+/*   ft_split2.c                                         :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pshandy <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,18 +12,34 @@
 
 #include "../minishell.h"
 
-int	ft_pwd(void)
-{
-	char	cwd[PATH_MAX];
+/*
+ * Делит строку str на две: слева и справа от 'token'.
+ * Возвращает массив из двух строк и NULL.
+ */
 
-	if (getcwd(cwd, PATH_MAX))
+char	**ft_split2(char *str, char token)
+{
+	int		i;
+	char	**arr;
+
+	arr = malloc(sizeof(char *) * 3);
+	if (!arr)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != token)
+		i++;
+	arr[0] = ft_substr(&str[0], 0, i);
+	if (arr[0] == NULL)
 	{
-		printf("%s\n", cwd);
-		return (0);
+		free(arr);
+		return (NULL);
 	}
-	else
+	arr[1] = ft_substr(&str[0], i + 1, ft_strlen(&str[i + 1]));
+	if (arr[1] == NULL)
 	{
-		printf("Ошибка pwd\n");
-		return (1);
+		free(arr[0]);
+		free(arr);
+		return (NULL);
 	}
+	return (arr);
 }
