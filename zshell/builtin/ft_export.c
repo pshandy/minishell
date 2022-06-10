@@ -44,6 +44,7 @@ int	ft_export(t_data *data, char *str)
 		add_to_hashmap(data, strarr[0], strarr[1]);
 	else
 	{
+		free(tmp->value);
 		tmp->value = strarr[1];
 		free(strarr[0]);
 	}

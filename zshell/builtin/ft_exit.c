@@ -36,17 +36,9 @@ void	ft_exit(t_data *data, char **args)
 		ret = ft_atoi(args[1]);
 	else if (args[1] && !is_number(args[1]))
 		ret = 2;
-	if (g_fork == 0)
-	{
-		ft_putstr_fd("exit_child\n", 1);
-		exit(ret);
-	}
-	else
-	{
-		ft_putstr_fd("exit\n", 1);
-		token_lstclear(&(data->head));
-		cmd_lstclear(&(data->cmds));
-		free_hashmap(data);
-		exit(ret);
-	}
+	ft_putstr_fd("exit\n", 1);
+	token_lstclear(&(data->head));
+	cmd_lstclear(&(data->cmds));
+	free_hashmap(data);
+	exit(ret);
 }
