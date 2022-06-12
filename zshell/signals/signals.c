@@ -21,13 +21,19 @@ int	g_fork;
 
 static void	signal_handler(int sig)
 {
-	(void) sig;
-	if (g_fork >= 0)
-		kill(g_fork, SIGKILL);
-	ft_putstr_fd("\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	pid_t	pid;
+	int		status;
+
+	pid = waitpid(-1, &status, WNOHANG);
+	if (pid == -1)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+	else
+		write(1, "\n", 1);
 }
 
 void	init_signal(void)

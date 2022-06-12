@@ -18,9 +18,11 @@ void	promt(t_data *data)
 {
 	char	*buf;
 
-	buf = readline("minishell >");
-	while (buf != NULL)
+	while (1)
 	{
+		buf = readline("minishell >");
+		if (!buf)
+			break ;
 		add_history(buf);
 		if (ft_strlen(buf) != 0 && tokenize(data, buf))
 		{
@@ -31,8 +33,8 @@ void	promt(t_data *data)
 			cmd_lstclear(&(data->cmds));
 		}
 		free(buf);
-		buf = readline("minishell >");
 	}
+	write (1, &"\n", 1);
 }
 
 int	main(int argc, char **argv, char **env)

@@ -14,6 +14,32 @@
 
 int	g_fork;
 
+void	launch_child(t_data *data, t_cmd *cmd)
+{
+	char	*tmp;
+
+	if (cmd->to_skip == 1)
+		exit(1);
+	tmp = NULL;
+	if (is_built_in(cmd->args[0]))
+		launch_builtin(data, cmd);
+	else
+	{
+		tmp = is_cmd_present(data, cmd);
+		if (tmp == NULL)
+		{
+			perror(cmd->args[0]);
+			data->exit_code = 127;
+		}
+		else
+		{
+			execve(tmp, cmd->args, hashmap_to_array(data));
+			data->exit_code = 126;
+		}
+	}
+	exit (data->exit_code);
+}
+
 void	preset_fork(t_data *data, t_cmd *cmd, int *fdin, int *fdout)
 {
 	int	fd[2];
@@ -58,8 +84,11 @@ void	execute2(t_data *data, t_cmd *cmd, int tmpin, int tmpout)
 		g_fork = fork();
 		if (g_fork == 0)
 			launch_child(data, cmd);
+		waitpid(g_fork, &(data->exit_code), 0);
+		data->exit_code = data->exit_code / 256;
 		cmd = cmd->next;
 	}
+	close(fdin);
 }
 
 void	execute(t_data *data)
@@ -80,8 +109,5 @@ void	execute(t_data *data)
 		dup2(tmpout, 1);
 		close(tmpin);
 		close(tmpout);
-		if (waitpid(g_fork, &(data->exit_code), 0)
-			== g_fork && WIFEXITED(data->exit_code))
-		data->exit_code = WEXITSTATUS(data->exit_code);
 	}
 }

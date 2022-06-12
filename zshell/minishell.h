@@ -70,6 +70,7 @@ typedef struct s_cmd
 	int				args_num;
 	int				infile;
 	int				outfile;
+	int				to_skip;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }			t_cmd;

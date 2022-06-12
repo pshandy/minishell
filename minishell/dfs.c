@@ -1,9 +1,7 @@
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
 #include <stdarg.h>
+#include <unistd.h>
 
-int nbrlen(long nbr, int base)
+int	nbrlen(long nbr, int base)
 {
 	int len = 1;
 	while (nbr >= base)
@@ -14,43 +12,40 @@ int nbrlen(long nbr, int base)
 	return (len);
 }
 
-void	putnbr(long nbr, int base, char *base_c)
+void	putnbr(long nbr, int base, char *str)
 {
 	if (nbr >= base)
-		putnbr(nbr / base, base, base_c);
-	write(1, &base_c[nbr % base], 1);
+		putnbr(nbr / base, base, str);
+	write(1, &str[nbr % base]);
 }
 
 int ft_printf(char *format, ...)
 {
 	va_list vlist;
-	int		ret = 0;
-	long	nbr;
-	int		len;
-	char	*str;
-	char	*s;
-	int		prec;
-	int		neg;
-	int		width;
-	int		spaces;
-	int		zeroes;
-
+	char *str;
+	char *s;
+	int ret = 0;
+	int	len = 0;
+	int prec = -1;
+	int width;
+	int spaces;
+	int zeroes;
+	int neg;
+	long nbr;
 
 	va_start(vlist, format);
 	str = (char *)format;
-
 	while (*str)
 	{
 		if (*str == '%')
 		{
 			str++;
+			width = 0;
+			prec = -1;
 			len = 0;
 			nbr = 0;
-			prec = -1;
-			width = 0;
-			spaces = 0;
 			zeroes = 0;
-			neg = 0;
+			spaces = 0;
 
 			while (*str >= '0' && *str <= '9')
 			{
@@ -61,7 +56,7 @@ int ft_printf(char *format, ...)
 			if (*str == '.')
 			{
 				str++;
-				prec = 0;
+				prec = -1;
 				while (*str >= '0' && *str <= '9')
 				{
 					prec = prec * 10 + (*str - '0');
@@ -74,7 +69,7 @@ int ft_printf(char *format, ...)
 				s = va_arg(vlist, char *);
 				if (!s)
 					s = "(null)";
-				while (s[len])
+				while (str[len])
 					len++;
 			}
 
@@ -83,10 +78,10 @@ int ft_printf(char *format, ...)
 				nbr = va_arg(vlist, int);
 				if (nbr < 0)
 				{
-					neg = 1;
 					nbr = -nbr;
+					neg = 1;
 				}
-				len = nbrlen(nbr, 10) + neg;
+				len = nbrlen(nbr) + neg;
 			}
 
 			if (*str == 'x')
@@ -104,7 +99,7 @@ int ft_printf(char *format, ...)
 
 			spaces = width - zeroes - len;
 			while (spaces-- > 0)
-				ret += write (1, " ", 1);
+				ret += write(1, " ", 1);
 			if (neg == 1)
 				write(1, "-", 1);
 			while (zeroes-- > 0)
@@ -115,7 +110,8 @@ int ft_printf(char *format, ...)
 			else if (*str == 'd')
 				putnbr(nbr, 10, "0123456789");
 			else if (*str == 'x')
-				putnbr(nbr, 16, "0123456789abcdef");
+				putnbt(nbr, 16, "0123456789abcdef");
+
 			ret += len;
 		}
 		else
@@ -124,11 +120,5 @@ int ft_printf(char *format, ...)
 	}
 
 	va_end(vlist);
-	return ret;
-}
-
-#include <stdio.h>
-int main()
-{
-
+	return (ret);
 }

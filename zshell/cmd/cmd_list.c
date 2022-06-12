@@ -24,6 +24,7 @@ int	cmd_lstinit(t_cmd **cmd_list)
 	(*cmd_list)->args = NULL;
 	(*cmd_list)->infile = -42;
 	(*cmd_list)->outfile = -42;
+	(*cmd_list)->to_skip = -42;
 	(*cmd_list)->prev = *cmd_list;
 	(*cmd_list)->next = *cmd_list;
 	return (1);
@@ -57,6 +58,7 @@ t_cmd	*cmd_create_elem(void)
 	cmd->args = NULL;
 	cmd->infile = -2;
 	cmd->outfile = -2;
+	cmd->to_skip = 0;
 	return (cmd);
 }
 

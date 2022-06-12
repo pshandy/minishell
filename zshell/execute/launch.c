@@ -12,24 +12,6 @@
 
 #include "../minishell.h"
 
-void	launch_child(t_data *data, t_cmd *cmd)
-{
-	char	*tmp;
-
-	tmp = NULL;
-	if (is_built_in(cmd->args[0]))
-		launch_builtin(data, cmd);
-	else
-	{
-		tmp = is_cmd_present(data, cmd);
-		if (tmp == NULL)
-			perror(cmd->args[0]);
-		else
-			execve(tmp, cmd->args, hashmap_to_array(data));
-	}
-	exit (data->exit_code);
-}
-
 void	launch_builtin(t_data *data, t_cmd *tmp)
 {
 	int	tmpin;
