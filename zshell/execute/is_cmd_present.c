@@ -49,8 +49,6 @@ char	*is_cmd_present(t_data *data, t_cmd *cmd)
 
 	if (ft_strlen(cmd->args[0]) == 0)
 		return (NULL);
-	if (access(cmd->args[0], F_OK) == 0)
-		return (cmd->args[0]);
 	mypath = get_path_array(data);
 	i = -1;
 	while (mypath && mypath[++i])
@@ -64,5 +62,7 @@ char	*is_cmd_present(t_data *data, t_cmd *cmd)
 		free(_cmd);
 	}
 	free_mypath(mypath);
+	if (access(cmd->args[0], F_OK) == 0)
+		return (cmd->args[0]);
 	return (NULL);
 }

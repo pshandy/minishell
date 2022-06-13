@@ -37,7 +37,6 @@ void	launch_child(t_data *data, t_cmd *cmd)
 		{
 			tmpenv = hashmap_to_array(data);
 			execve(tmp, cmd->args, tmpenv);
-			data->exit_code = 126;
 		}
 	}
 	exit (data->exit_code);
