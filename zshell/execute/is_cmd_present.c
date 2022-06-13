@@ -47,6 +47,8 @@ char	*is_cmd_present(t_data *data, t_cmd *cmd)
 	char	**mypath;
 	char	*_cmd;
 
+	if (ft_strlen(cmd->args[0]) == 0)
+		return (NULL);
 	if (access(cmd->args[0], F_OK) == 0)
 		return (cmd->args[0]);
 	mypath = get_path_array(data);

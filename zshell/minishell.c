@@ -16,15 +16,20 @@ int	g_fork;
 
 void	promt(t_data *data)
 {
+	int		i;
 	char	*buf;
 
 	while (1)
 	{
+		i = 0;
 		buf = readline("minishell >");
 		if (!buf)
 			break ;
-		add_history(buf);
-		if (ft_strlen(buf) != 0 && tokenize(data, buf))
+		while (buf[i] && ft_isspace(buf[i]))
+			i++;
+		if (ft_strlen(&buf[i]) != 0)
+			add_history(&buf[i]);
+		if (ft_strlen(&buf[i]) != 0 && tokenize(data, &buf[i]))
 		{
 			cmd_lstinit(&(data->cmds));
 			get_cmd(data);

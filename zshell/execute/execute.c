@@ -17,6 +17,7 @@ int	g_fork;
 void	launch_child(t_data *data, t_cmd *cmd)
 {
 	char	*tmp;
+	char	**tmpenv;
 
 	if (cmd->to_skip == 1)
 		exit(1);
@@ -28,12 +29,14 @@ void	launch_child(t_data *data, t_cmd *cmd)
 		tmp = is_cmd_present(data, cmd);
 		if (tmp == NULL)
 		{
-			perror(cmd->args[0]);
+			if (!ft_strlen(cmd->args[0]) == 0)
+				perror(cmd->args[0]);
 			data->exit_code = 127;
 		}
 		else
 		{
-			execve(tmp, cmd->args, hashmap_to_array(data));
+			tmpenv = hashmap_to_array(data);
+			execve(tmp, cmd->args, tmpenv);
 			data->exit_code = 126;
 		}
 	}
@@ -98,7 +101,8 @@ void	execute(t_data *data)
 	t_cmd	*cmd;
 
 	cmd = data->cmds->next;
-	if (is_built_in(cmd->args[0]) && cmd->next == data->cmds)
+	if (is_built_in(cmd->args[0]) && cmd->next == data->cmds
+		&& cmd->to_skip == 0)
 		launch_builtin(data, cmd);
 	else
 	{

@@ -60,6 +60,8 @@ int	create_token_list(t_data *data, char *line)
 		if (!*line)
 			break ;
 		token_str = get_token_str(&line);
+		if (token_str == NULL)
+			token_str = ft_strdup("");
 		if (!token_lstadd_back(&(data->head), token_str, 0))
 			return (0);
 		set_type(data->head->prev);

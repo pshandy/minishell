@@ -132,7 +132,7 @@ void	set_type(t_token *token)
 		token->type = APPEND;
 	else if (ft_strcmp(token->str, "|") == 0)
 		token->type = PIPE;
-	else if (token->prev->type == 0 || token->prev->type == PIPE)
+	else if (token->prev->type == -42 || token->prev->type == PIPE)
 		token->type = CMD;
 	else
 		token->type = ARG;

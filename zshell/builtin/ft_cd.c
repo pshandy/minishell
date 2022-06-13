@@ -36,6 +36,20 @@ static void	update_oldpwd(t_data *data)
 	free(oldpwd);
 }
 
+static void	update_currpwd(t_data *data)
+{
+	char	cwd[PATH_MAX];
+	char	*oldpwd;
+
+	if (getcwd(cwd, PATH_MAX) == NULL)
+		return ;
+	oldpwd = ft_strjoin("PWD=", cwd);
+	if (!oldpwd)
+		return ;
+	ft_export(data, oldpwd);
+	free(oldpwd);
+}
+
 int	ft_cd(t_data *data, char **args)
 {
 	int	ret;
@@ -47,6 +61,7 @@ int	ft_cd(t_data *data, char **args)
 			ret = chdir(get_value(data, "HOME"));
 		else
 			ret = chdir(args[1]);
+		update_currpwd(data);
 		if (ret < 0)
 			ret *= -1;
 		if (ret == 1)
