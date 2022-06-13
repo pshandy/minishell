@@ -28,9 +28,13 @@ static char	**get_path_array(t_data *data)
 {
 	int		i;
 	char	*tmp;
+	char	*value;
 	char	**mypath;
 
-	mypath = ft_split(get_value(data, "PATH"), ':');
+	value = get_value(data, "PATH");
+	if (!value)
+		return (NULL);
+	mypath = ft_split(value, ':');
 	i = -1;
 	while (mypath[++i])
 	{
@@ -61,7 +65,8 @@ char	*is_cmd_present(t_data *data, t_cmd *cmd)
 		}
 		free(_cmd);
 	}
-	free_mypath(mypath);
+	if (mypath)
+		free_mypath(mypath);
 	if (access(cmd->args[0], F_OK) == 0)
 		return (cmd->args[0]);
 	return (NULL);
